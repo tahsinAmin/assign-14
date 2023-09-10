@@ -1,4 +1,4 @@
-import { SignJWT } from "jose";
+import { SignJWT, jwtVerify } from "jose";
 import { NextResponse } from "next/server";
 
 export async function GET(req, res) {
@@ -12,4 +12,14 @@ export async function GET(req, res) {
     .sign(Key);
 
   return NextResponse.json({ token: token });
+}
+
+export async function POST(req, res) {
+  const JsonBody = await req.json();
+  const token = JsonBody["token"];
+
+  const Key = new TextEncoder().encode(process.env.JWT_KEY);
+
+  const decoded = await jwtVerify(token, Key);
+  return NextResponse.json(decoded);
 }
