@@ -1,6 +1,7 @@
 # Instruction
 - Craeate an .env file by seeing the .env.sample 
 
+- [x] 1. User Registration and Email Verification:
 
 - [x] 4. Encoding and Decoding Tokens:
 
