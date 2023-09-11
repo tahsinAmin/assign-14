@@ -1,7 +1,8 @@
-import { SignJWT } from "jose";
+import { TokenCookie } from "@/app/utility/TokenCookie";
 import { NextResponse } from "next/server";
 
 export async function POST(req, res) {
+  console.log("Insid login")
   const jsonBody = await req.json();
   let email = jsonBody["email"];
   let password = jsonBody["password"];
@@ -11,22 +12,19 @@ export async function POST(req, res) {
     const payload = { email: email };
 
     // Create token
-    const key = new TextEncoder().encode(process.env.JWT_KEY);
-    const token = await new SignJWT(payload)
-      .setProtectedHeader({ alg: "HS256" })
-      .setIssuedAt()
-      .setIssuer("https://localhost:3000")
-      .setExpirationTime("2h")
-      .sign(key);
-
+    let Cookie = await TokenCookie(email);
     return NextResponse.json(
-      { status: true, message: "Login Successful", token: token },
-      { status: 200 }
+      { status: true, message: "Request completed" },
+      { status: 200, headers: Cookie }
     );
   } else {
-    return NextResponse.json(
-      { status: false, messgae: "Invalid User" },
-      { status: 401 }
-    );
+    return NextResponse.json({ status: false, message: "Request Fail" });
   }
+}
+
+export async function GET(req,res) {
+  cookies().delete('token')
+  return NextResponse.json(
+      {status:true,message:"Request Completed"}
+  )
 }

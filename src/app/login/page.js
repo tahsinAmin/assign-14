@@ -17,6 +17,7 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formValue);
     if (formValue.email.length === 0) {
       alert("email Required");
     } else if (formValue.password.length === 0) {
@@ -25,6 +26,7 @@ export default function Home() {
       const config = { method: "POST", body: JSON.stringify(formValue) };
       const response = await fetch("/api/Login", config);
       const json = await response.json();
+      console.log(json["status"])
       if (json["status"] === true) {
         router.replace("/dashboard");
       } else {

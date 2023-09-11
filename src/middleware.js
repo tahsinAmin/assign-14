@@ -1,10 +1,7 @@
-import { NextResponse } from "next/server";
-
-export async function middleware(req, res) {
-  if (req.nextUrl.pathname.startsWith("/dashboard")) {
-
-    return NextResponse.next();
-  } else {
-    return NextResponse.next();
-  }
+import {CheckCookieAuth} from "@/app/utility/MiddlewareUtility";
+export async function middleware(req) {
+    if (req.nextUrl.pathname.startsWith('/dashboard')) {
+        return await CheckCookieAuth(req)
+    }
 }
+
