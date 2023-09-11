@@ -3,12 +3,12 @@ import { NextResponse } from "next/server";
 
 export async function POST(req, res) {
   const jsonBody = await req.json();
-  let username = jsonBody["username"];
+  let email = jsonBody["email"];
   let password = jsonBody["password"];
 
   //  Check with database if it's correct
-  if (username === "ABC" && password === "123") {
-    const payload = { username: username };
+  if (email === "email@email.com" && password === "123") {
+    const payload = { email: email };
 
     // Create token
     const key = new TextEncoder().encode(process.env.JWT_KEY);
