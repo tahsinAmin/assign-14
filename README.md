@@ -7,13 +7,8 @@
 - [-] 2. Setting Tokens in Headers:
     - [x] Fix the login credential whether it works or not
         - POST `http://localhost:3000/api/Login` with json body 
-        ```
-        {
-            "username": "ABC",
-            "password": "123"
-        }
-        ```
-    - [] Then call it from middleware.
+    - [x] Login page to Dashboard if successful
+    - [] Add username in header using middleware.
 
 
 - [x] 4. Encoding and Decoding Tokens:

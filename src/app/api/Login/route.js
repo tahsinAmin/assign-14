@@ -2,7 +2,6 @@ import { SignJWT } from "jose";
 import { NextResponse } from "next/server";
 
 export async function POST(req, res) {
-    console.log("hello");
   const jsonBody = await req.json();
   let username = jsonBody["username"];
   let password = jsonBody["password"];
@@ -21,12 +20,12 @@ export async function POST(req, res) {
       .sign(key);
 
     return NextResponse.json(
-      { status: "Success", message: "Login Successful" },
+      { status: true, message: "Login Successful", token: token },
       { status: 200 }
     );
   } else {
     return NextResponse.json(
-      { status: "fail", messgae: "Invalid User" },
+      { status: false, messgae: "Invalid User" },
       { status: 401 }
     );
   }
